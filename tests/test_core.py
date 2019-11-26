@@ -2,7 +2,7 @@ import unittest
 from pandas.util.testing import assert_frame_equal
 from python_scripts import core
 import pandas as pd
-
+import numpy as np
 
 class TestCore(unittest.TestCase):
 
@@ -20,4 +20,23 @@ class TestCore(unittest.TestCase):
         assert_frame_equal(
             df,
             df_expected
+        )
+
+    def test_missing_info(self):
+        df = pd.DataFrame({
+                'col1': [1, 1, 1, 1],
+                'col2': [1, np.nan, np.nan, 1]
+            })
+
+        missging_table = core.missing_info(df)
+
+        assert_frame_equal(
+            missging_table,
+            pd.DataFrame(
+                {
+                    'sum': [0, 2],
+                    'ratio': [0.0, 0.5]
+                },
+                index=['col1', 'col2']
+            )
         )
