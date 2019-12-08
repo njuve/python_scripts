@@ -4,6 +4,7 @@ from python_scripts import core
 import pandas as pd
 import numpy as np
 
+
 class TestCore(unittest.TestCase):
 
     def test_read_csvs(self):
@@ -39,4 +40,14 @@ class TestCore(unittest.TestCase):
                 },
                 index=['col1', 'col2']
             )
+        )
+
+    def test_multiple_lambda(self):
+        df = pd.DataFrame({
+                'col1': [1, 1, 1, 1],
+                'col2': [1, 2, 3, 1]
+            })
+        self.assertEqual(
+            core.multiple_lambda(df, 'col1', 'col2'),
+            [2, 3, 4, 2]
         )

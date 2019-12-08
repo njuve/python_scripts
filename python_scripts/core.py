@@ -60,3 +60,7 @@ def plot_bar_with_pval_lines(feature, data, signficant_pairs):
         ax.vlines(center2, max_height + 1, max_height + 3)
         ax.hlines(max_height + 3, center1, center2)
         ax.text(np.mean([center1, center2]), max_height + 4, '*')
+
+
+def multiple_lambda(df, col1, col2):
+    return list(map(lambda x, y: x + y, df[col1], df[col2]))
