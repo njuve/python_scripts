@@ -64,3 +64,30 @@ def plot_bar_with_pval_lines(feature, data, signficant_pairs):
 
 def multiple_lambda(df, col1, col2):
     return list(map(lambda x, y: x + y, df[col1], df[col2]))
+
+
+def print_arg():
+    print(f'We compute 1 + 2 = {1+2} and 2 + 3 = {2+3}')
+
+
+def read_df(path, read_from='pickle', view=True, save=False, save_path=None):
+    def view(df):
+        display(df.head())
+        display(df.shape)
+
+    def save(df, save_path):
+        df.to_pickle(save_path)
+
+    def read(path, read_from):
+        if read_from == 'pickle':
+            return pd.read_pickle(path)
+        elif read_from == 'csv':
+            return pd.read_csv(path)
+
+    df = read(path, read_from)
+    if save:
+        save(df, save_path)
+    if view:
+        view(df)
+
+    return df
